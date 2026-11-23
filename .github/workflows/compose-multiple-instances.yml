@@ -1,0 +1,24 @@
+name: Multiple T3 Docker instances
+
+on:
+  push:
+    branches: [compose-multiple-instances]
+    paths:
+      - compose.yaml
+      - tests/compose-multiple-instances.*
+      - .github/workflows/compose-multiple-instances.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Start three independent T3 servers
+        run: bash tests/compose-multiple-instances.sh

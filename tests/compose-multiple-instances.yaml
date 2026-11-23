@@ -1,0 +1,18 @@
+services:
+  t3code:
+    container_name: "${COMPOSE_PROJECT_NAME}-t3code"
+    restart: "no"
+    environment:
+      T3_ALLOW_SUDO: "0"
+      T3_AUTO_ADD_PROJECTS: "0"
+      T3_PERSIST_AGENT_CREDENTIALS: "0"
+      T3_PREINSTALL: none
+      T3_PRINT_PAIRING_ON_START: "0"
+      T3_SETUP_ENABLED: "0"
+    ports: !override
+      - "127.0.0.1:${T3_PORT}:3773"
+    volumes:
+      - smoke-workspace:/workspace
+
+volumes:
+  smoke-workspace:
